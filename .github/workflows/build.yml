@@ -1,0 +1,45 @@
+name: Norman Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      brief:
+        description: 'Design brief for Norman'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Norman
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          node scripts/build.js --brief "${{ inputs.brief }}" --output ./output
+
+      - name: Commit deliverable
+        run: |
+          git config user.name "Norman"
+          git config user.email "norman@users.noreply.github.com"
+          git add output/
+          git diff --staged --quiet || git commit -m "build: ${{ inputs.brief }}"
+          git push
+
+      - name: Upload deliverable
+        uses: actions/upload-artifact@v4
+        with:
+          name: norman-deliverable
+          path: output/*.md

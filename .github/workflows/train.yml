@@ -1,0 +1,88 @@
+name: Weekly Agent Training
+
+on:
+  schedule:
+    # Every Monday at 9:00 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+    inputs:
+      agent:
+        description: 'Specific agent to train (leave empty for all)'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run training loop
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -n "${{ inputs.agent }}" ]; then
+            node scripts/train.js --agent ${{ inputs.agent }}
+          else
+            node scripts/train.js
+          fi
+
+      - name: Commit training results
+        run: |
+          git config user.name "Norman Training Bot"
+          git config user.email "norman@users.noreply.github.com"
+          git add training-history/
+          git diff --staged --quiet || git commit -m "training: $(date +%Y-%m-%d) evaluation run"
+          git push
+
+      - name: Check for regressions
+        id: check
+        run: |
+          # Find the latest run file
+          LATEST=$(ls -t training-history/run_*.json 2>/dev/null | head -1)
+          if [ -z "$LATEST" ]; then
+            echo "No results found"
+            exit 0
+          fi
+
+          # Check if any agent scored below 3.0
+          FAILURES=$(node -e "
+            const data = require('./$LATEST');
+            const failures = Object.entries(data.summary)
+              .filter(([_, v]) => v.avgOverall < 3.0)
+              .map(([k, v]) => k + ' (' + v.avgOverall + '/5)');
+            if (failures.length) {
+              console.log(failures.join(', '));
+              process.exit(1);
+            }
+          " 2>&1) || true
+
+          if [ -n "$FAILURES" ]; then
+            echo "failures=$FAILURES" >> $GITHUB_OUTPUT
+            echo "has_failures=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Open issue for regressions
+        if: steps.check.outputs.has_failures == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const failures = '${{ steps.check.outputs.failures }}';
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `⚠️ Agent regression detected — ${new Date().toISOString().split('T')[0]}`,
+              body: `The weekly training run found agents scoring below 3.0:\n\n**${failures}**\n\nCheck the latest results in \`training-history/\` and review the suggested SKILL.md changes.\n\nRun \`node scripts/train.js\` locally to investigate.`,
+              labels: ['training', 'regression']
+            });

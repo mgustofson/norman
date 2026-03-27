@@ -1,0 +1,21 @@
+{
+  "name": "norman",
+  "version": "0.1.0",
+  "description": "A virtual design team powered by specialized AI agents",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "review": "node scripts/review.js",
+    "evaluate": "node scripts/evaluate.js",
+    "train": "node scripts/train.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.4.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "Max Gustofson",
+  "license": "MIT"
+}
