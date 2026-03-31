@@ -1,7 +1,6 @@
 node_modules/
 .env
 .DS_Store
-training-history/*.json
 !training-history/feedback/
 !training-history/.gitkeep
 output/raw/
