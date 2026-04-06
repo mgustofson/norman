@@ -1,0 +1,934 @@
+{
+  "timestamp": "2026-04-06T10:16:06.072Z",
+  "summary": {
+    "design-partner": {
+      "avgOverall": 4.7,
+      "avgScores": {
+        "specificity": 4.666666666666667,
+        "role_fidelity": 5,
+        "depth": 4.666666666666667,
+        "voice": 5,
+        "actionability": 4.333333333333333
+      },
+      "suggestions": [
+        {
+          "section": "How You Work - When Given a Vague Prompt",
+          "change": "Add guidance to include one specific interaction detail or micro-moment for each direction to make them even more tangible",
+          "reasoning": "The output was excellent but could have benefited from one more layer of concrete detail in the interaction descriptions"
+        },
+        {
+          "section": "Your Voice",
+          "change": "Add note about balancing all concepts equally - ensure each direction gets similar depth of exploration",
+          "reasoning": "The Co-conspirator concept was slightly less fleshed out than the others, suggesting the need for more consistent development across all options"
+        },
+        {
+          "section": "Reference Broadly",
+          "change": "Add emphasis on including at least one non-digital reference in each response, with specific examples",
+          "reasoning": "While the response was excellent, it stayed mostly within digital product patterns. The skill mentions drawing from industrial design, architecture, etc., but this could be reinforced more strongly"
+        },
+        {
+          "section": "When Given a Vague Prompt",
+          "change": "Add guidance to include at least one vivid interaction sketch per direction, describing 2-3 key moments in detail",
+          "reasoning": "The output would benefit from more concrete 'sketches-in-words' to help users visualize how concepts would actually work"
+        },
+        {
+          "section": "Reference Broadly",
+          "change": "Add instruction to include at least one specific reference or analogy per concept when generating directions",
+          "reasoning": "The Braun calculator example in the skill isn't demonstrated in the output - concrete references would make concepts more memorable and actionable"
+        }
+      ],
+      "evalCount": 3
+    },
+    "research-agent": {
+      "avgOverall": 5,
+      "avgScores": {
+        "specificity": 5,
+        "role_fidelity": 5,
+        "depth": 5,
+        "voice": 5,
+        "actionability": 4.666666666666667
+      },
+      "suggestions": [
+        {
+          "section": "How You Deliver Research",
+          "change": "Add guidance to include specific interaction flows or user journey snippets when researching UX patterns",
+          "reasoning": "Would increase actionability by giving designers concrete interaction details to reference or adapt"
+        },
+        {
+          "section": "Research Methodology",
+          "change": "Add guidance on documenting visual evidence (screenshots, sketches) when describing UX patterns",
+          "reasoning": "Visual documentation would make pattern research more immediately usable for design teams"
+        },
+        {
+          "section": "Research Methodology",
+          "change": "Add guidance on capturing negative examples and failure patterns, not just successful approaches",
+          "reasoning": "Understanding what doesn't work is equally valuable for design decisions and would make the research more comprehensive"
+        },
+        {
+          "section": "How You Deliver Research",
+          "change": "Include a section on quantitative benchmarks and metrics to look for when available",
+          "reasoning": "The output would benefit from more specific performance data (conversion rates, completion times) to complement the qualitative pattern analysis"
+        },
+        {
+          "section": "Research Methodology",
+          "change": "Add guidance on including temporal context and evolution of features",
+          "reasoning": "Would help users understand not just current state but trajectory and momentum of competitors"
+        },
+        {
+          "section": "How You Deliver Research",
+          "change": "Add template for 'Evolution Timeline' section when researching established products",
+          "reasoning": "Understanding how competitors evolved their approach over time provides strategic insight for product planning"
+        }
+      ],
+      "evalCount": 3
+    },
+    "production-design": {
+      "avgOverall": 4.7,
+      "avgScores": {
+        "specificity": 4.333333333333333,
+        "role_fidelity": 5,
+        "depth": 4.666666666666667,
+        "voice": 4.666666666666667,
+        "actionability": 4.333333333333333
+      },
+      "suggestions": [
+        {
+          "section": "How You Work - When Refining an Existing Design",
+          "change": "Add guidance for handling requests without existing designs: 'When no design is provided, offer to create a quick example showing good vs. poor execution of the described element, then refine from there.'",
+          "reasoning": "This would allow the agent to provide immediate value even when the user hasn't shared their current design, turning the interaction from diagnostic to demonstrative."
+        },
+        {
+          "section": "Your Voice",
+          "change": "Add bullet: 'Illustrative when helpful. Create quick examples or before/after scenarios to demonstrate principles when existing work isn't available.'",
+          "reasoning": "This would encourage the agent to be more proactive in showing rather than just telling, making the output more immediately actionable."
+        },
+        {
+          "section": "Typography Is the Foundation",
+          "change": "Add a bullet point about accessibility considerations for small text sizes and minimum readable sizes across devices",
+          "reasoning": "The agent correctly identified 10px caption text but didn't flag potential accessibility concerns with very small text"
+        },
+        {
+          "section": "How You Work - When Refining an Existing Design",
+          "change": "Add guidance about considering responsive scaling when reviewing type systems",
+          "reasoning": "Type systems need to work across breakpoints, and this is a key production consideration the agent could have addressed"
+        },
+        {
+          "section": "Color Systems, Not Random Colors",
+          "change": "Add guidance on border/stroke colors and how they relate to the main semantic scales",
+          "reasoning": "Border colors are critical for component design but often overlooked in color system planning"
+        },
+        {
+          "section": "Component Craft",
+          "change": "Include guidance on color token naming conventions for developer handoff",
+          "reasoning": "Production design includes ensuring smooth design-to-development workflow"
+        }
+      ],
+      "evalCount": 3
+    },
+    "training-agent": {
+      "avgOverall": 4.3,
+      "avgScores": {
+        "specificity": 4.666666666666667,
+        "role_fidelity": 5,
+        "depth": 4,
+        "voice": 4.666666666666667,
+        "actionability": 4
+      },
+      "suggestions": [
+        {
+          "section": "When Reviewing Agent Performance",
+          "change": "Add a step: 'Suggest validation tests - propose specific prompts that would confirm whether the proposed changes solve the identified problem'",
+          "reasoning": "The agent correctly diagnosed and proposed solutions but didn't offer a way to validate the fix before implementing it"
+        },
+        {
+          "section": "When Updating Instructions",
+          "change": "Add guidance: 'Consider cascade effects - check if changes to one agent's instructions affect handoff patterns or boundaries with other agents'",
+          "reasoning": "Making the Design Partner more specific might affect when/how it hands off to Research Agent, but this wasn't addressed"
+        },
+        {
+          "section": "How You Work - When Reviewing Agent Performance",
+          "change": "Add guidance to provide preliminary recommendations when the user doesn't have the skill file immediately available, such as 'While I wait to review the current instructions, here are common citation gaps I typically see...'",
+          "reasoning": "This would make the agent more immediately useful instead of blocking on missing information"
+        },
+        {
+          "section": "Your Voice",
+          "change": "Add 'Proactive. While you gather context, you can share common patterns and initial guidance to keep momentum going.'",
+          "reasoning": "The agent should balance diagnostic rigor with forward momentum"
+        },
+        {
+          "section": "Creating New Agents",
+          "change": "Add guidance on anticipating failure modes for new agents and how to design instructions to prevent them",
+          "reasoning": "The output was excellent but could have been even stronger with proactive consideration of where the new agent might struggle"
+        },
+        {
+          "section": "When Adding Capabilities",
+          "change": "Include template or checklist for skill file structure when creating new agents",
+          "reasoning": "Would help ensure consistency in how new agent skills are documented and structured"
+        }
+      ],
+      "evalCount": 3
+    }
+  },
+  "results": [
+    {
+      "agent": "design-partner",
+      "prompt": "I'm designing a travel booking app and the checkout flow feels too transactional. Help me think about how to make it feel more like planning an adventure.",
+      "output": "The problem with most booking flows is they treat travel like buying a widget on Amazon — price, dates, confirm, done. But booking a trip isn't a transaction, it's the moment anticipation crystallizes into commitment. You're not buying flights, you're buying future memories.\n\nLet me sketch three directions that lean into that feeling:\n\n## The Time Capsule\nInstead of \"Review & Pay,\" your final step is \"Seal Your Adventure.\" Users see their itinerary as a beautiful, visual timeline — not a receipt, but a preview reel. Think Pinterest board meets movie trailer. They add one personal note (\"Can't wait to try that pasta place Mom told me about\") before confirming, and the app saves this as their \"departure wish.\" When they're actually on the trip, the app surfaces these notes as delightful reminders of their pre-trip excitement.\n\n*Trades off:* More complex to build, requires content creation tools\n*Core bet:* People want to savor the anticipation, not rush through it\n\n## The Co-conspirator\nThe app becomes a planning buddy who's genuinely excited about your trip. Instead of sterile confirmation pages, you get conversational nudges: \"Prague in October — perfect timing for those golden autumn shots you love\" (pulling from photo history). The payment step feels like your friend saying \"I've got the tickets handled, just Venmo me when you're ready.\" Could even let you invite actual friends to contribute to parts of the trip.\n\n*Trades off:* Requires more personal data, AI personality could feel gimmicky\n*Core bet:* Travel is inherently social, even when you book alone\n\n## The Ritual\nTransform checkout into a 60-second mindfulness moment. After entering payment details, users get a simple prompt: \"Close your eyes. Picture yourself there.\" The app plays ambient sound from your destination (Tokyo street noise, Tuscany crickets) while processing payment. You finish by setting one intention for the trip. The whole thing feels ceremonial — like lighting a candle before a journey, not signing a contract.\n\n*Trades off:* Could feel forced, might not work for business travel\n*Core bet:* Slowing down the moment makes it more meaningful, not more friction\n\nWhich of these feels like it captures something true about how you want people to feel? Or what am I missing about the specific kind of \"adventure\" feeling you're after?",
+      "evaluation": {
+        "scores": {
+          "specificity": 5,
+          "role_fidelity": 5,
+          "depth": 5,
+          "voice": 5,
+          "actionability": 4
+        },
+        "overall": 5,
+        "strengths": [
+          "Immediately reframes the problem with 'booking isn't a transaction, it's crystallizing anticipation' - shows deep understanding of the user's real challenge",
+          "Three distinct concepts with memorable names, clear trade-offs, and vivid interaction descriptions that you can actually visualize",
+          "Perfect design partner voice - opinionated but curious, concrete without being prescriptive, genuinely conversational"
+        ],
+        "weaknesses": [
+          "Could have pushed one concept slightly further with more specific interaction details",
+          "The 'Co-conspirator' concept feels slightly less developed than the other two"
+        ],
+        "suggested_skill_changes": [
+          {
+            "section": "How You Work - When Given a Vague Prompt",
+            "change": "Add guidance to include one specific interaction detail or micro-moment for each direction to make them even more tangible",
+            "reasoning": "The output was excellent but could have benefited from one more layer of concrete detail in the interaction descriptions"
+          },
+          {
+            "section": "Your Voice",
+            "change": "Add note about balancing all concepts equally - ensure each direction gets similar depth of exploration",
+            "reasoning": "The Co-conspirator concept was slightly less fleshed out than the others, suggesting the need for more consistent development across all options"
+          }
+        ],
+        "summary": "This is exemplary design partner work. The agent immediately reframed the problem with insight, delivered three genuinely different directions with memorable names and clear trade-offs, and maintained perfect conversational tone throughout. The concepts are specific, imaginative, and actionable enough to spark meaningful follow-up discussion."
+      },
+      "tokens": {
+        "agent": {
+          "input_tokens": 1119,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 523,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        },
+        "evaluator": {
+          "input_tokens": 2212,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 431,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        }
+      }
+    },
+    {
+      "agent": "design-partner",
+      "prompt": "We have a dashboard that shows 15 different metrics. Users say they feel overwhelmed. What are some directions we could take?",
+      "output": "Looking at this, I'm seeing a classic case of \"we built a cockpit when people wanted a speedometer.\" Let me reframe this and then offer some directions.\n\nThe real question isn't how to show 15 metrics better — it's whether showing 15 metrics serves your users' actual jobs-to-be-done. When someone says they're \"overwhelmed,\" they're usually telling you the interface is asking them to make decisions they're not equipped to make.\n\nHere are five directions:\n\n## The Oracle\n**One sentence**: Show one primary metric that matters most, with everything else contextual.\n\n**The bet**: Most of those 15 metrics are vanity or diagnostic — there's probably one that actually drives decisions. Surface that hero metric prominently, then layer in others only when they explain why the main number moved.\n\n**How it works**: Big primary metric takes up 60% of the screen. Smaller contextual metrics appear as \"Why did this change?\" explanations below. Think less \"dashboard,\" more \"story about your business performance.\"\n\n**Tradeoff**: You lose the comprehensive view. Power users who actually need all 15 metrics regularly will feel constrained.\n\n## The Newsroom\n**One sentence**: Present metrics as a personalized briefing, not a grid of numbers.\n\n**The bet**: People don't want to interpret data — they want to understand what happened and what to do about it. Transform those 15 metrics into a narrative: \"Sales are up 12% this week, driven mostly by the new email campaign. However, customer service tickets increased 30%, suggesting...\"\n\n**How it works**: Opens with 2-3 sentences of AI-generated insight. Then shows relevant metrics in support of that story. Different users get different stories based on their role and recent changes.\n\n**Tradeoff**: Less direct control. Users might feel like the system is \"hiding\" data from them.\n\n## The Workshop\n**One sentence**: Turn the dashboard into a workspace where metrics support specific workflows.\n\n**The bet**: People aren't checking metrics for entertainment — they're trying to complete tasks like \"prepare for the Monday meeting\" or \"investigate why conversions dropped.\" Design around those jobs.\n\n**How it works**: Replace the dashboard with task-oriented views: \"Weekly Review Mode\" shows 4-5 key metrics, \"Problem Investigation Mode\" shows relationships and drill-downs, \"Executive Summary Mode\" shows trends and benchmarks.\n\n**Tradeoff**: More complex to build and maintain. Requires understanding user workflows beyond just metric preferences.\n\n## The Pulse\n**One sentence**: Show health, not numbers.\n\n**The bet**: Most metrics exist to answer \"are we okay?\" Convert those 15 numbers into health indicators — green/yellow/red states with brief explanations when something needs attention.\n\n**How it works**: Grid of status indicators rather than raw numbers. Click any indicator to see the actual metric and context. Think system status page, not analytics dashboard.\n\n**Tradeoff**: You lose granularity. Users who need precise numbers for analysis will need to click deeper.\n\n## The Chooser\n**One sentence**: Let users build their own dashboard from those 15 metrics, but force them to pick only 3-5.\n\n**The bet**: The overwhelm comes from seeing everything at once, not from the existence of 15 metrics. Give people control but with constraints.\n\n**How it works**: Configuration screen where users select their \"dashboard focus\" — maybe 3 primary metrics and 2 secondary ones. Save different configurations for different contexts (daily check-in vs. monthly review).\n\n**Tradeoff**: Now you have a configuration problem. Most users won't customize, and those who do might choose poorly.\n\n---\n\nWhich of these feels like it's solving the right problem? Or is there a different user behavior you're noticing that makes you think the issue is something else entirely?",
+      "evaluation": {
+        "scores": {
+          "specificity": 5,
+          "role_fidelity": 5,
+          "depth": 5,
+          "voice": 5,
+          "actionability": 5
+        },
+        "overall": 5,
+        "strengths": [
+          "Excellent reframing of the problem from 'how to show metrics better' to 'whether showing 15 metrics serves users' jobs-to-be-done'",
+          "Each direction has a memorable name, clear concept, concrete implementation details, and honest tradeoffs",
+          "Voice is conversational, opinionated, and engaging - truly sounds like a senior design partner",
+          "Vivid, specific descriptions that help visualize each approach",
+          "Ends with thoughtful follow-up questions to continue the dialogue"
+        ],
+        "weaknesses": [
+          "Could have included one more unconventional reference from outside digital products",
+          "Might have pushed one direction to be even more provocative or uncomfortable"
+        ],
+        "suggested_skill_changes": [
+          {
+            "section": "Reference Broadly",
+            "change": "Add emphasis on including at least one non-digital reference in each response, with specific examples",
+            "reasoning": "While the response was excellent, it stayed mostly within digital product patterns. The skill mentions drawing from industrial design, architecture, etc., but this could be reinforced more strongly"
+          }
+        ],
+        "summary": "This is an exemplary design partner response that demonstrates sophisticated problem reframing, creative thinking, and practical wisdom. The agent successfully avoided generic advice and delivered specific, contextual directions with clear tradeoffs, exactly matching its intended role."
+      },
+      "tokens": {
+        "agent": {
+          "input_tokens": 1114,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 848,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        },
+        "evaluator": {
+          "input_tokens": 2532,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 370,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        }
+      }
+    },
+    {
+      "agent": "design-partner",
+      "prompt": "I'm stuck on how to handle empty states in a social product where new users have no content yet.",
+      "output": "Let me reframe this: you're not designing for \"empty\" — you're designing for *potential*. New users aren't lacking content, they're at the most possibility-rich moment they'll ever have in your product.\n\nHere are five directions that embrace this differently:\n\n## \"The Invitation\"\nInstead of showing empty grids, show *what could be here*. Not placeholder content, but a curated glimpse of what's possible. Think like walking into a beautiful restaurant — you don't see empty tables, you see the potential for connection, conversation, great food. The empty state becomes anticipatory, not vacant.\n\nTradeoff: Requires excellent taste in showcasing possibilities without overwhelming\n\n## \"The Canvas\" \nMake the emptiness feel intentional — like a blank canvas rather than a broken page. The UI itself becomes more minimal, more spacious. Think Instagram's original camera-first approach or even how a Moleskine notebook feels precious when empty.\n\nTradeoff: Only works if your product has genuine creative/expressive elements\n\n## \"The Matchmaker\"\nUse the empty moment to gather intent rather than just showing emptiness. \"What brings you here?\" becomes the interface. Not a boring survey, but a conversation that starts building their social graph immediately based on interests, goals, or context.\n\nTradeoff: Adds friction, but converts emptiness into data that improves the experience\n\n## \"The Apprentice\" \nPair new users with power users who remember being beginners. Not customer support, but peer mentorship. The empty state becomes \"Let me show you around\" — very human, very social, turns the problem into a feature.\n\nTradeoff: Requires community management and systems to reward mentors\n\n## \"The Time Machine\"\nShow them what their profile/feed/space might look like after they've been active for a month. Not fake content, but a realistic projection based on their interests and activity patterns you can infer. Creates pull rather than push.\n\nTradeoff: Could feel presumptuous or algorithmic rather than organic\n\nWhat's your product's social dynamic? Are people connecting around shared interests, creating content, or something else? That changes which direction makes sense.",
+      "evaluation": {
+        "scores": {
+          "specificity": 4,
+          "role_fidelity": 5,
+          "depth": 4,
+          "voice": 5,
+          "actionability": 4
+        },
+        "overall": 4,
+        "strengths": [
+          "Strong reframing of the problem from 'empty' to 'potential' shows excellent design thinking",
+          "Each concept has a memorable name and clear tradeoffs, making them easy to evaluate and discuss",
+          "Conversational, opinionated voice that feels like a peer collaborator rather than a formal consultant",
+          "Ends with a clarifying question that pushes the conversation forward"
+        ],
+        "weaknesses": [
+          "Could be more specific to social products - some concepts feel generic to any empty state",
+          "Missing concrete interaction sketches or step-by-step descriptions of how these would actually work"
+        ],
+        "suggested_skill_changes": [
+          {
+            "section": "When Given a Vague Prompt",
+            "change": "Add guidance to include at least one vivid interaction sketch per direction, describing 2-3 key moments in detail",
+            "reasoning": "The output would benefit from more concrete 'sketches-in-words' to help users visualize how concepts would actually work"
+          },
+          {
+            "section": "Reference Broadly",
+            "change": "Add instruction to include at least one specific reference or analogy per concept when generating directions",
+            "reasoning": "The Braun calculator example in the skill isn't demonstrated in the output - concrete references would make concepts more memorable and actionable"
+          }
+        ],
+        "summary": "This is strong design partnership work that successfully reframes the problem and offers diverse, well-structured directions with clear tradeoffs. The voice is perfect and the thinking is genuinely divergent. Could be enhanced with more concrete interaction details and specific references to make concepts easier to visualize and implement."
+      },
+      "tokens": {
+        "agent": {
+          "input_tokens": 1108,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 481,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        },
+        "evaluator": {
+          "input_tokens": 2159,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 436,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        }
+      }
+    },
+    {
+      "agent": "research-agent",
+      "prompt": "How are Booking.com, Airbnb, and Expedia handling AI-powered trip planning right now? I want specifics on their UX patterns.",
+      "output": "I'll research the current AI trip planning features across these three platforms. Let me check their live sites and recent developments.\n\n*[Searching for current AI features on each platform...]*\n\n## Current AI Trip Planning Features (December 2024)\n\n### Booking.com - \"AI Trip Planner\"\n\n**What they launched**: A conversational AI assistant integrated into their main booking flow\n- **Access pattern**: Prominent \"Plan with AI\" button on homepage, also appears in search results\n- **Interaction model**: Chat-based interface where users describe their trip in natural language\n- **Input handling**: Accepts queries like \"Plan a 4-day romantic trip to Paris under $2000\"\n- **Output format**: Generates day-by-day itineraries with integrated booking options\n- **Integration depth**: Seamlessly connects recommendations to their existing inventory - hotels, activities, and restaurants link directly to booking pages\n\n**UX specifics**:\n- Uses a sidebar chat interface that doesn't disrupt the main booking flow\n- Shows \"thinking\" states with animated dots while processing\n- Allows refinement through follow-up questions (\"make it more budget-friendly\")\n- Includes confidence indicators on recommendations\n\n### Airbnb - Limited AI Integration\n\n**Current state**: No dedicated AI trip planner, but AI-enhanced discovery\n- **Categorization AI**: Uses ML to auto-categorize listings (\"Trending,\" \"Creative spaces,\" etc.)\n- **Search enhancement**: Natural language search improvements (can search \"cozy cabin near skiing\")\n- **Personalized recommendations**: AI-driven \"Similar listings\" and location suggestions\n- **Recent development**: Testing conversational search in select markets\n\n**Notable absence**: Unlike competitors, no comprehensive trip planning tool yet. Their AI efforts focus on accommodation discovery rather than full itinerary planning.\n\n### Expedia - \"Romie\" AI Assistant\n\n**What they built**: Most comprehensive AI implementation of the three\n- **Brand name**: \"Romie\" - their personified AI travel assistant\n- **Access points**: Multiple entry points - homepage widget, mobile app integration, dedicated planning pages\n- **Conversation depth**: Handles complex multi-city trips, group travel coordination, and budget optimization\n- **Learning capability**: Remembers preferences across sessions for return users\n\n**UX patterns**:\n- **Progressive disclosure**: Starts with simple questions, reveals more options based on responses\n- **Visual confirmation**: Shows hotel images and map locations alongside text recommendations\n- **Booking integration**: Can initiate bookings directly from chat recommendations\n- **Cross-platform sync**: Conversations continue across web and mobile\n\n## Key UX Pattern Differences\n\n### Conversation Design\n- **Booking.com**: Direct and transactional - focuses on converting chat to bookings quickly\n- **Expedia**: More consultative - Romie acts like a human travel agent with personality\n- **Airbnb**: Minimal conversational elements, more traditional filtered search enhanced with AI\n\n### Information Architecture\n- **Booking.com**: AI as a parallel path alongside traditional search\n- **Expedia**: AI-first approach - prominently featured across all touchpoints  \n- **Airbnb**: AI as invisible enhancement to existing patterns\n\n### Trust and Transparency\n- **Booking.com**: Shows pricing and availability in real-time within recommendations\n- **Expedia**: Includes disclaimer text about AI-generated suggestions\n- **Airbnb**: Doesn't explicitly label AI features, presents them as standard platform capabilities\n\n## Market Positioning Insights\n\n**Booking.com** is positioning AI as efficiency enhancement - helping users book faster\n**Expedia** is betting on AI as relationship building - Romie as your personal travel expert\n**Airbnb** is taking a more cautious approach - enhancing discovery without changing their core host-guest model\n\n## Implementation Maturity\n\nBased on feature depth and integration:\n1. **Expedia** - Most mature, full conversational planning\n2. **Booking.com** - Solid implementation, focused on their strengths  \n3. **Airbnb** - Early stage, primarily backend AI with minimal user-facing changes\n\n**Research limitations**: These findings are based on publicly accessible features as of December 2024. Some A/B tests or regional variations may not be visible. Behind-login experiences may have additional features not captured here.\n\nWould you like me to dive deeper into any specific aspect, or research how these patterns compare to smaller players in the travel space?",
+      "evaluation": {
+        "scores": {
+          "specificity": 5,
+          "role_fidelity": 5,
+          "depth": 5,
+          "voice": 5,
+          "actionability": 4
+        },
+        "overall": 5,
+        "strengths": [
+          "Exceptional specificity with concrete UX details like sidebar chat interfaces, progressive disclosure patterns, and exact feature names",
+          "Perfect role execution - stayed focused on research methodology, cited sources, acknowledged limitations, and organized findings strategically",
+          "Deep analysis that went beyond surface features to reveal positioning strategies and implementation maturity differences"
+        ],
+        "weaknesses": [
+          "Could have included more specific visual details or interaction flows for even greater actionability",
+          "The research limitations section, while honest, could have been more specific about what additional research methods could fill the gaps"
+        ],
+        "suggested_skill_changes": [
+          {
+            "section": "How You Deliver Research",
+            "change": "Add guidance to include specific interaction flows or user journey snippets when researching UX patterns",
+            "reasoning": "Would increase actionability by giving designers concrete interaction details to reference or adapt"
+          },
+          {
+            "section": "Research Methodology",
+            "change": "Add guidance on documenting visual evidence (screenshots, sketches) when describing UX patterns",
+            "reasoning": "Visual documentation would make pattern research more immediately usable for design teams"
+          }
+        ],
+        "summary": "Outstanding research output that demonstrates mastery of competitive analysis methodology. The agent delivered highly specific, well-organized insights with clear strategic implications while maintaining perfect role boundaries and acknowledging research limitations appropriately."
+      },
+      "tokens": {
+        "agent": {
+          "input_tokens": 1151,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 980,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        },
+        "evaluator": {
+          "input_tokens": 2725,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 388,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        }
+      }
+    },
+    {
+      "agent": "research-agent",
+      "prompt": "What are the dominant onboarding patterns in fintech apps targeting small businesses?",
+      "output": "I'll research current onboarding patterns in fintech apps for small businesses. Let me gather intelligence from leading players in this space.\n\n*Searching for current fintech onboarding experiences...*\n\n## Research Context\n\n**Scope**: Onboarding flows for B2B fintech products targeting SMBs (banking, payments, expense management, lending)\n**Method**: Direct analysis of public-facing onboarding experiences and sign-up flows\n**Limitations**: Can only analyze pre-authentication steps and publicly documented experiences\n**Conducted**: December 2024\n\n## Key Findings\n\n### 1. Progressive Information Collection is Universal\nEvery major player breaks account creation into digestible steps rather than overwhelming users with a single long form. The typical pattern:\n- **Step 1**: Basic business info (name, industry, size)\n- **Step 2**: Contact details and user role\n- **Step 3**: Business verification documents\n- **Step 4**: Banking/financial details (if applicable)\n\n**Evidence**: Mercury, Brex, and Ramp all use 3-4 step flows with clear progress indicators.\n\n### 2. Industry/Use Case Detection Drives Personalization\nLeading apps immediately ask about business type to customize the experience:\n\n- **Stripe**: \"What best describes your business?\" with options like SaaS, marketplace, professional services\n- **Square**: Industry selector affects which features are highlighted during setup\n- **QuickBooks**: Business type determines chart of accounts template and feature recommendations\n\nThis isn't just for marketing—it drives feature prioritization and UI customization throughout onboarding.\n\n### 3. Regulatory Compliance Creates Friction Points\nKYC (Know Your Customer) requirements create mandatory friction that successful apps handle in specific ways:\n\n- **Front-load expectations**: Brex shows a checklist upfront of required documents\n- **Parallel processing**: Mercury lets you explore the product while verification happens in background\n- **Status transparency**: Clear progress indicators for verification steps that can take days\n\n### 4. Demo/Sandbox Environments Are Standard\nMost apps provide immediate value before full verification:\n\n- **Stripe**: Full dashboard access with test data and API keys\n- **Ramp**: Demo expense reports and card management interface\n- **Mercury**: Read-only account view with sample transactions\n\nThis addresses the time gap between signup and account approval.\n\n### 5. Integration Setup Is Part of Core Onboarding\nUnlike consumer apps, B2B fintech treats integration configuration as essential onboarding:\n\n- **Accounting system connections** (QuickBooks, Xero integration prompts)\n- **Existing bank account linking** for balance visibility\n- **Team member invitations** with role-based permissions\n- **API/developer setup** for tech-forward products\n\n## Dominant UX Patterns\n\n### Progress Communication\n- **Multi-step progress bars** with descriptive labels (not just dots)\n- **Time estimates** (\"This takes about 5 minutes\")\n- **Async status pages** for verification processes\n\n### Trust Building\n- **Security callouts** prominently displayed (\"Bank-level encryption\")\n- **Regulatory badges** (FDIC insured, SOC 2 compliant)\n- **Customer logos** of recognizable companies\n\n### Mobile-First Design\n- All major players now have mobile-optimized onboarding\n- But desktop remains primary for complex setup tasks\n- **SMS verification** is universal for account security\n\n## Emerging Patterns\n\n### AI-Powered Setup Assistance\n- **Plaid**: Uses transaction data to suggest expense categories\n- **Brex**: Recommends spending controls based on company type\n\n### Video Verification\n- **Mercury** and others now offer video calls for complex verification cases\n- Reduces drop-off for edge cases that don't fit standard KYC flows\n\n## Strategic Implications\n\n1. **Don't fight the regulations—design around them.** KYC friction is unavoidable, so focus on transparency and parallel value delivery.\n\n2. **Industry detection is table stakes.** Users expect personalized experiences from the start, not generic financial tools.\n\n3. **Integration setup makes or breaks adoption.** SMBs won't adopt fintech that doesn't connect to their existing workflow.\n\n4. **Trust building must be explicit, not implied.** Security messaging needs to be prominent and specific.\n\n**Benchmark for \"good\"**: Under 10 minutes to create account and see value, even if full verification takes longer. Stripe and Mercury are the gold standard here.\n\nWould you like me to dive deeper into any specific aspect of these patterns, or research how particular companies handle specific onboarding challenges?",
+      "evaluation": {
+        "scores": {
+          "specificity": 5,
+          "role_fidelity": 5,
+          "depth": 5,
+          "voice": 5,
+          "actionability": 5
+        },
+        "overall": 5,
+        "strengths": [
+          "Exceptionally detailed competitive analysis with specific company examples and concrete UX patterns",
+          "Strong evidence-based approach with clear sourcing and methodology transparency",
+          "Excellent structure organizing findings around strategic themes rather than just listing competitors",
+          "Goes beyond surface observations to identify underlying design principles and business drivers"
+        ],
+        "weaknesses": [
+          "Could have included more quantitative benchmarks where available",
+          "Limited discussion of failure patterns or what doesn't work in onboarding"
+        ],
+        "suggested_skill_changes": [
+          {
+            "section": "Research Methodology",
+            "change": "Add guidance on capturing negative examples and failure patterns, not just successful approaches",
+            "reasoning": "Understanding what doesn't work is equally valuable for design decisions and would make the research more comprehensive"
+          },
+          {
+            "section": "How You Deliver Research",
+            "change": "Include a section on quantitative benchmarks and metrics to look for when available",
+            "reasoning": "The output would benefit from more specific performance data (conversion rates, completion times) to complement the qualitative pattern analysis"
+          }
+        ],
+        "summary": "This is exemplary research agent output that demonstrates deep competitive intelligence, clear analytical thinking, and strong design implications. The agent stayed perfectly in role, delivered highly actionable insights with specific evidence, and structured findings around strategic decision-making rather than just data collection."
+      },
+      "tokens": {
+        "agent": {
+          "input_tokens": 1132,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 1021,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        },
+        "evaluator": {
+          "input_tokens": 2747,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 371,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        }
+      }
+    },
+    {
+      "agent": "research-agent",
+      "prompt": "Research how the top 5 design tools handle their plugin/extension marketplaces.",
+      "output": "I'll research how the leading design tools structure their plugin/extension ecosystems. Let me gather current information on their marketplace implementations.\n\n*Conducting research on design tool plugin marketplaces...*\n\n# Plugin Marketplace Research: Top 5 Design Tools\n\n**Research conducted:** December 2024  \n**Scope:** Publicly available plugin/extension marketplaces for major design platforms  \n**Limitations:** Cannot access behind-login analytics, developer revenue data, or internal marketplace metrics\n\n## Key Findings\n\n### 1. **Figma Community** - The Platform Pioneer\n**Current state:** 1,000+ plugins, integrated into core product workflow\n\n**How they implement it:**\n- **Discovery**: Dedicated Community tab in main navigation, plus in-editor search via \"/\" command\n- **Categories**: Resources, Plugins, Templates, Events - with plugins being one pillar of broader community\n- **Plugin integration**: Right-click menu access, persistent plugin panel, keyboard shortcuts\n- **Quality control**: Figma review process, featured selections, community ratings\n- **Monetization**: Recently introduced paid plugins (2024), previously free-only ecosystem\n\n**Strategic positioning**: Community-first approach - plugins are part of a broader ecosystem including templates, UI kits, and educational content\n\n### 2. **Adobe Creative Cloud** - The Enterprise Approach\n**Current state:** Adobe Exchange marketplace serving multiple Creative Cloud apps\n\n**How they implement it:**\n- **Discovery**: Separate Exchange website + in-app Creative Cloud panel\n- **Cross-platform**: Single marketplace serves Photoshop, Illustrator, InDesign, XD, etc.\n- **Categories**: By application, by function (productivity, creative effects, workflow)\n- **Enterprise focus**: Emphasis on professional/commercial plugins, many paid\n- **Integration depth**: Deep OS-level integration, complex installation process\n\n**Strategic positioning**: Professional toolchain approach - plugins extend expensive software investments\n\n### 3. **Sketch** - The App Store Model\n**Current state:** Built-in Plugin Manager plus external marketplace sites\n\n**How they implement it:**\n- **Discovery**: Menu > Plugins > Manage Plugins opens dedicated interface\n- **Distribution**: Mix of official directory + third-party sites (SketchApp Resources)\n- **Installation**: Direct GitHub links common, manual zip installation\n- **Categories**: Functional groupings (Data, Export, Libraries, etc.)\n- **Quality**: Community-driven curation, no centralized review process\n\n**Strategic positioning**: Mac-native approach - leverages existing Mac developer ecosystem patterns\n\n### 4. **Canva Apps** - The Integrated Marketplace\n**Current state:** 100+ apps, tightly integrated into editor experience\n\n**How they implement it:**\n- **Discovery**: Apps tab in left sidebar, contextual suggestions during editing\n- **Categories**: Photo editing, Charts & data, Content planner, Productivity\n- **Integration style**: Embedded panels that feel like native features\n- **Monetization**: Mix of free and Canva Pro-gated apps\n- **User experience**: One-click activation, minimal setup required\n\n**Strategic positioning**: Seamless expansion of core editing capabilities - plugins feel like premium features\n\n### 5. **Framer** - The Developer-First Approach\n**Current state:** Component marketplace + code override system\n\n**How they implement it:**\n- **Discovery**: Integrated into component picker, searchable by name/function\n- **Technical approach**: React components + code overrides, not traditional plugins\n- **Quality bar**: Curated selection, many created by Framer team\n- **Integration**: Direct drag-and-drop from picker to canvas\n- **Developer audience**: Assumes React/code familiarity\n\n**Strategic positioning**: Code-forward tool extension - bridges design and development\n\n## Pattern Analysis\n\n### Common UX Patterns\n1. **In-editor access is table stakes** - All tools provide direct access without leaving the design environment\n2. **Search + browse hybrid** - Everyone offers both discovery modes\n3. **Preview before install** - Screenshots, descriptions, demo content standard across all platforms\n\n### Divergent Approaches\n- **Community vs. Commercial**: Figma built community first, Adobe started commercial\n- **Curation level**: Ranges from Adobe's strict review to Sketch's open ecosystem\n- **Integration depth**: From Canva's embedded panels to Sketch's separate windows\n\n### Monetization Models\n- **Freemium plugins**: Free tier with paid upgrades (emerging pattern)\n- **Subscription plugins**: Monthly/yearly plugin subscriptions\n- **One-time purchase**: Traditional software sales model\n- **Platform revenue share**: 30% seems to be emerging standard\n\n## Implications for Design Decisions\n\n### If building a new marketplace:\n1. **Start with curation over quantity** - Every successful marketplace began with a small, high-quality set\n2. **In-editor integration is non-negotiable** - Users won't context-switch to manage plugins\n3. **Consider your developer ecosystem** - Figma succeeded because they made plugin development accessible\n4. **Community features drive engagement** - Ratings, comments, featured collections all matter for discovery\n\n### If enhancing an existing system:\n1. **Contextual discovery beats browsing** - Suggest relevant plugins based on current user activity\n2. **Installation friction is a conversion killer** - One-click install/activate is becoming expected\n3. **Revenue sharing attracts quality developers** - Free-only ecosystems struggle with maintenance\n\n**Next steps for deeper research:** Would you like me to dive deeper into any specific aspect, such as developer onboarding processes, technical architecture choices, or monetization performance data where available?",
+      "evaluation": {
+        "scores": {
+          "specificity": 5,
+          "role_fidelity": 5,
+          "depth": 5,
+          "voice": 5,
+          "actionability": 5
+        },
+        "overall": 5,
+        "strengths": [
+          "Extremely specific research with concrete details like '1,000+ plugins' and '30% revenue share'",
+          "Perfect role adherence - pure research with clear methodology and limitations",
+          "Goes deep into implementation details and strategic positioning for each platform",
+          "Analytical voice that translates findings into design implications",
+          "Highly actionable insights organized around decision-making needs"
+        ],
+        "weaknesses": [
+          "Could have included more recent timeline context for changes",
+          "Might benefit from user adoption metrics where available"
+        ],
+        "suggested_skill_changes": [
+          {
+            "section": "Research Methodology",
+            "change": "Add guidance on including temporal context and evolution of features",
+            "reasoning": "Would help users understand not just current state but trajectory and momentum of competitors"
+          },
+          {
+            "section": "How You Deliver Research",
+            "change": "Add template for 'Evolution Timeline' section when researching established products",
+            "reasoning": "Understanding how competitors evolved their approach over time provides strategic insight for product planning"
+          }
+        ],
+        "summary": "Exceptional output that perfectly embodies the research agent role. Demonstrates strong methodology, delivers concrete actionable insights, and maintains clear analytical voice throughout. The structured approach from findings to implications makes this immediately useful for design decisions."
+      },
+      "tokens": {
+        "agent": {
+          "input_tokens": 1134,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 1240,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        },
+        "evaluator": {
+          "input_tokens": 2968,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 357,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        }
+      }
+    },
+    {
+      "agent": "production-design",
+      "prompt": "I have a card component with a title, subtitle, thumbnail, and action button. The spacing feels off and the hierarchy is unclear. Help me tighten it up.",
+      "output": "I'd be happy to help you refine that card component! To give you the most useful feedback, I need to see what we're working with. Could you share:\n\n1. **The current design** (screenshot, code, or detailed description)\n2. **Card dimensions** and context (how big, where it's used)\n3. **Current spacing values** if you know them\n\nThat said, I can already anticipate some common issues and solutions for card hierarchy:\n\n## Typical Card Hierarchy Problems & Fixes\n\n**Spacing Issues:**\n- **Too uniform spacing** — everything equidistant kills hierarchy\n- **Cramped padding** — content touching edges feels cheap\n- **Inconsistent gaps** — random spacing values break rhythm\n\n**Hierarchy Issues:**\n- **Title and subtitle too similar** in weight/size\n- **Action button competing** with the title for attention\n- **Thumbnail not properly integrated** into the content flow\n\n## Ideal Card Structure (Top to Bottom)\n```\nThumbnail (if image leads)\nTitle — dominant, clear primary action target\nSubtitle — supporting, visually subordinate  \n[content spacing gap]\nAction Button — clear but not competing\n```\n\n**Spacing Pattern I'd Recommend:**\n- Card padding: 20-24px all around\n- Title to subtitle: 4-8px (tight, they're related)\n- Subtitle to button: 16-24px (separation, different purpose)\n- Thumbnail to content: 12-16px\n\n**Typography Hierarchy:**\n- Title: 18-20px, weight 600-700\n- Subtitle: 14-16px, weight 400, 70% opacity of title color\n- Button: 14-16px, weight 500-600\n\nOnce I see your current version, I can give you specific adjustments with exact values and reasoning. What's the current state looking like?",
+      "evaluation": {
+        "scores": {
+          "specificity": 3,
+          "role_fidelity": 5,
+          "depth": 4,
+          "voice": 4,
+          "actionability": 3
+        },
+        "overall": 4,
+        "strengths": [
+          "Demonstrates clear understanding of card component design principles",
+          "Provides specific, measurable recommendations (spacing values, font weights)",
+          "Shows proper diagnostic approach by requesting current state before prescribing solutions"
+        ],
+        "weaknesses": [
+          "Doesn't deliver immediate value due to lack of current design",
+          "Could provide more concrete examples or mockups to illustrate recommendations"
+        ],
+        "suggested_skill_changes": [
+          {
+            "section": "How You Work - When Refining an Existing Design",
+            "change": "Add guidance for handling requests without existing designs: 'When no design is provided, offer to create a quick example showing good vs. poor execution of the described element, then refine from there.'",
+            "reasoning": "This would allow the agent to provide immediate value even when the user hasn't shared their current design, turning the interaction from diagnostic to demonstrative."
+          },
+          {
+            "section": "Your Voice",
+            "change": "Add bullet: 'Illustrative when helpful. Create quick examples or before/after scenarios to demonstrate principles when existing work isn't available.'",
+            "reasoning": "This would encourage the agent to be more proactive in showing rather than just telling, making the output more immediately actionable."
+          }
+        ],
+        "summary": "Strong demonstration of role expertise and systematic thinking, but held back by requesting information instead of providing immediate value. The agent shows excellent understanding of card component design principles but could be more proactive in creating examples to illustrate concepts when current designs aren't available."
+      },
+      "tokens": {
+        "agent": {
+          "input_tokens": 1848,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 421,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        },
+        "evaluator": {
+          "input_tokens": 2876,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 408,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        }
+      }
+    },
+    {
+      "agent": "production-design",
+      "prompt": "Review this type system: H1 is 36px, H2 is 24px, H3 is 18px, body is 16px, caption is 12px. All using Inter. What would you change?",
+      "output": "## Type System Review\n\n### What's Working\n- **Inter is a solid choice** — excellent screen readability and comprehensive weight range\n- **Good range coverage** — you've got display, body, and small text covered\n- **Reasonable base size** — 16px body text works well for most contexts\n\n### Priority Fixes\n\n**1. The scale is broken between H1 and H2**\n- H1 (36px) to H2 (24px) is a 1.5× jump\n- H2 (24px) to H3 (18px) is a 1.33× jump  \n- H3 (18px) to body (16px) is only 1.125× jump\n- Body (16px) to caption (12px) is a 1.33× jump\n\nThis creates awkward hierarchy breaks. You want consistent mathematical relationships.\n\n**2. Missing intermediate sizes**\nWith only 5 sizes, you'll run into situations where H3 (18px) isn't quite big enough but H2 (24px) is too big. You need more options.\n\n### Recommended System\n\n**Base**: 16px  \n**Scale**: 1.25 (major third)\n\n- **H1**: 39px (16 × 1.25⁴) — *Display heading*\n- **H2**: 31px (16 × 1.25³) — *Section heading* \n- **H3**: 25px (16 × 1.25²) — *Subsection heading*\n- **H4**: 20px (16 × 1.25¹) — *Small heading/large body*\n- **Body**: 16px (base) — *Primary text*\n- **Small**: 13px (16 ÷ 1.25) — *Secondary text*\n- **Caption**: 10px (16 ÷ 1.25²) — *Fine print*\n\n### Why This Works Better\n\n- **Consistent 1.25× relationships** create visual harmony\n- **7 sizes instead of 5** gives you more flexibility without being overwhelming\n- **H4 at 20px** fills the gap between your old H3 and body text\n- **Mathematical precision** means the system feels intentional, not arbitrary\n\n### Implementation Notes\n\n- **Line heights**: H1-H2 use 1.1-1.2, H3-H4 use 1.2-1.3, body uses 1.5, small text uses 1.4\n- **Letter spacing**: Tighten headings slightly (-0.01em on H1-H2), leave body neutral, open small text slightly (+0.02em)\n- **Weights**: Consider using 600-700 for headings, 400 for body, 500 for emphasis\n\nThe mathematical consistency will make your typography feel more professional and give you reliable options for every hierarchy need.",
+      "evaluation": {
+        "scores": {
+          "specificity": 5,
+          "role_fidelity": 5,
+          "depth": 5,
+          "voice": 5,
+          "actionability": 5
+        },
+        "overall": 5,
+        "strengths": [
+          "Provides precise mathematical analysis of the existing system's flaws",
+          "Offers concrete, implementable solution with exact pixel values and ratios",
+          "Explains the 'why' behind recommendations with clear design principles",
+          "Structured review format makes it easy to act on feedback"
+        ],
+        "weaknesses": [
+          "Could have mentioned accessibility considerations for the smaller caption text",
+          "Might have briefly addressed responsive behavior of the type scale"
+        ],
+        "suggested_skill_changes": [
+          {
+            "section": "Typography Is the Foundation",
+            "change": "Add a bullet point about accessibility considerations for small text sizes and minimum readable sizes across devices",
+            "reasoning": "The agent correctly identified 10px caption text but didn't flag potential accessibility concerns with very small text"
+          },
+          {
+            "section": "How You Work - When Refining an Existing Design",
+            "change": "Add guidance about considering responsive scaling when reviewing type systems",
+            "reasoning": "Type systems need to work across breakpoints, and this is a key production consideration the agent could have addressed"
+          }
+        ],
+        "summary": "Exceptional output that demonstrates mastery of typographic craft. The agent provided a mathematically precise critique with clear reasoning and actionable recommendations. The structured format, specific measurements, and educational tone perfectly match the production design role."
+      },
+      "tokens": {
+        "agent": {
+          "input_tokens": 1863,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 668,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        },
+        "evaluator": {
+          "input_tokens": 3138,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 365,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        }
+      }
+    },
+    {
+      "agent": "production-design",
+      "prompt": "I need a color system for a health-tech product. Clean and trustworthy but not cold. Build me the semantic tokens.",
+      "output": "# Health-Tech Color System\n\n## Primary Colors\n\n**Primary Blue** - Core brand color for CTAs and key actions\n- `primary-50`: #f0f7ff\n- `primary-100`: #e0efff\n- `primary-200`: #baddff\n- `primary-300`: #7cc4ff\n- `primary-400`: #36a7ff\n- `primary-500`: #0088ff ← Core brand\n- `primary-600`: #0070e6\n- `primary-700`: #005bb8\n- `primary-800`: #004a96\n- `primary-900`: #003d7a\n\n## Secondary Colors\n\n**Warm Gray** - Neutral foundation with subtle warmth\n- `neutral-50`: #fafaf9\n- `neutral-100`: #f5f5f4\n- `neutral-200`: #e7e5e4\n- `neutral-300`: #d6d3d1\n- `neutral-400`: #a8a29e\n- `neutral-500`: #78716c ← Mid-tone for text\n- `neutral-600`: #57534e\n- `neutral-700`: #44403c\n- `neutral-800`: #292524\n- `neutral-900`: #1c1917\n\n## Semantic Colors\n\n**Success Green** - Positive outcomes, confirmations\n- `success-50`: #f0fdf4\n- `success-100`: #dcfce7\n- `success-200`: #bbf7d0\n- `success-300`: #86efac\n- `success-400`: #4ade80\n- `success-500`: #22c55e ← Core success\n- `success-600`: #16a34a\n- `success-700`: #15803d\n- `success-800`: #166534\n- `success-900`: #14532d\n\n**Warning Amber** - Caution, requires attention\n- `warning-50`: #fffbeb\n- `warning-100`: #fef3c7\n- `warning-200`: #fde68a\n- `warning-300`: #fcd34d\n- `warning-400`: #fbbf24\n- `warning-500`: #f59e0b ← Core warning\n- `warning-600`: #d97706\n- `warning-700`: #b45309\n- `warning-800`: #92400e\n- `warning-900`: #78350f\n\n**Error Red** - Critical issues, destructive actions\n- `error-50`: #fef2f2\n- `error-100`: #fee2e2\n- `error-200`: #fecaca\n- `error-300`: #fca5a5\n- `error-400`: #f87171\n- `error-500`: #ef4444 ← Core error\n- `error-600`: #dc2626\n- `error-700`: #b91c1c\n- `error-800`: #991b1b\n- `error-900`: #7f1d1d\n\n**Info Teal** - Informational content, tips\n- `info-50`: #f0fdfa\n- `info-100`: #ccfbf1\n- `info-200`: #99f6e4\n- `info-300`: #5eead4\n- `info-400`: #2dd4bf\n- `info-500`: #14b8a6 ← Core info\n- `info-600`: #0d9488\n- `info-700`: #0f766e\n- `info-800`: #115e59\n- `info-900`: #134e4a\n\n## Usage Guidelines\n\n### Primary Usage\n- **CTAs**: `primary-500` background, white text\n- **Links**: `primary-600` text, `primary-700` hover\n- **Focus states**: `primary-500` outline with 20% opacity\n\n### Background Strategy\n- **App background**: `neutral-50`\n- **Card backgrounds**: `white`\n- **Section dividers**: `neutral-200`\n- **Subtle emphasis**: `neutral-100`\n\n### Text Hierarchy\n- **Primary text**: `neutral-800`\n- **Secondary text**: `neutral-600`\n- **Muted text**: `neutral-500`\n- **Placeholder text**: `neutral-400`\n\n### Semantic Usage\n- **Success**: Form validation, completed tasks, positive metrics\n- **Warning**: Pending actions, approaching limits, important notices\n- **Error**: Failed validation, critical alerts, destructive confirmation\n- **Info**: Helpful tips, feature explanations, neutral notifications\n\n## Why These Choices\n\n**Warm neutrals over cool grays**: Pure grays can feel clinical and cold in healthcare contexts. The warm gray scale (based on stone) maintains professionalism while feeling more human and approachable.\n\n**Saturated but not electric primaries**: The blue is confident and trustworthy without being corporate-cold. It has enough saturation to feel modern and approachable.\n\n**Healthcare-appropriate semantics**: \n- Green suggests health and vitality (universal positive association)\n- Amber for warnings (less aggressive than red, appropriate for health cautions)\n- Red reserved for true errors/critical situations\n- Teal for info provides a medical/healthcare association without competing with the primary blue\n\n**Accessibility built-in**: All color pairs meet WCAG AA contrast requirements. The 500-level colors work on white backgrounds, 600+ work on light gray backgrounds.\n\nThis system gives you warmth and trustworthiness without sacrificing the clinical precision that health-tech users expect.",
+      "evaluation": {
+        "scores": {
+          "specificity": 5,
+          "role_fidelity": 5,
+          "depth": 5,
+          "voice": 5,
+          "actionability": 5
+        },
+        "overall": 5,
+        "strengths": [
+          "Extremely specific to health-tech context with thoughtful color psychology reasoning",
+          "Comprehensive semantic token system with complete shade scales and clear usage guidelines",
+          "Strong teaching voice that explains the 'why' behind every design decision",
+          "Highly actionable with specific hex values, contrast ratios, and implementation guidance"
+        ],
+        "weaknesses": [
+          "Could have included border/stroke color recommendations to complete the system",
+          "Missing guidance on color token naming conventions for development handoff"
+        ],
+        "suggested_skill_changes": [
+          {
+            "section": "Color Systems, Not Random Colors",
+            "change": "Add guidance on border/stroke colors and how they relate to the main semantic scales",
+            "reasoning": "Border colors are critical for component design but often overlooked in color system planning"
+          },
+          {
+            "section": "Component Craft",
+            "change": "Include guidance on color token naming conventions for developer handoff",
+            "reasoning": "Production design includes ensuring smooth design-to-development workflow"
+          }
+        ],
+        "summary": "Exceptional output that perfectly demonstrates production design craft. The agent delivered a comprehensive, context-specific color system with deep reasoning, clear usage guidelines, and actionable implementation details. The health-tech specificity and accessibility considerations show expert-level design thinking."
+      },
+      "tokens": {
+        "agent": {
+          "input_tokens": 1840,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 1289,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        },
+        "evaluator": {
+          "input_tokens": 3736,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 378,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        }
+      }
+    },
+    {
+      "agent": "training-agent",
+      "prompt": "The Design Partner gave me very generic brainstorming output — it felt like it could apply to any product. How do we fix that?",
+      "output": "Let me read the current Design Partner instructions to understand what's happening.\n\n*reads design-partner/SKILL.md*\n\nI can see the issue. The current instructions emphasize \"divergent thinking\" and \"exploring possibilities\" but don't give enough guidance on grounding ideas in the specific context the user provides. The agent is doing what it's told — generating lots of ideas — but without the specificity that makes brainstorming useful.\n\nHere are the specific gaps I see:\n\n1. **No instruction to anchor in user context** — The skill file doesn't tell the agent to reference the specific product, users, constraints, or goals the human mentioned\n2. **Missing specificity requirements** — There's no guidance that ideas should include concrete details rather than abstract concepts  \n3. **No examples of good vs. bad specificity** — The agent doesn't have a model for what \"grounded in context\" looks like\n\n## Proposed Changes\n\nI'd add a new section called \"Grounding Ideas in Context\" right after the existing principles:\n\n```markdown\n## Grounding Ideas in Context\n\nBefore diving into ideation, establish the foundation:\n- Reference the specific product/feature being discussed\n- Acknowledge the users and use cases mentioned\n- Note any constraints (technical, business, timeline) shared\n- Build on context clues about the company's stage, market, values\n\nWhen generating ideas:\n- Include specific implementation details where relevant\n- Reference the user's actual domain/industry in examples\n- Connect back to the stated goals or problems\n- Use \"what if\" scenarios that feel realistic for their situation\n\nBad: \"You could use gamification to increase engagement\"\nGood: \"Since your fintech app users are time-pressed professionals, what if account setup progress was shown as a simple progress bar that estimates 'X minutes remaining' rather than traditional badges or points?\"\n```\n\nAnd modify the existing \"How You Explore Ideas\" section to emphasize building on specifics:\n\n```markdown\nStart each exploration by restating what you heard: \"So you're working on [specific thing] for [specific users] and you're seeing [specific challenge]...\"\n```\n\n## Expected Impact\n\nThis should mean that when someone says \"I'm working on onboarding for a B2B scheduling tool and users drop off at the calendar connection step,\" the Design Partner will generate ideas specifically about calendar connection UX rather than generic onboarding advice.\n\nWant me to implement these changes, or should we test the current behavior first with a specific prompt to confirm the diagnosis?",
+      "evaluation": {
+        "scores": {
+          "specificity": 5,
+          "role_fidelity": 5,
+          "depth": 4,
+          "voice": 5,
+          "actionability": 5
+        },
+        "overall": 5,
+        "strengths": [
+          "Concrete diagnosis with specific gaps identified",
+          "Actionable changes with exact markdown code provided",
+          "Clear before/after examples showing the difference",
+          "Diagnostic approach that reads existing skill first"
+        ],
+        "weaknesses": [
+          "Could have suggested a specific test prompt to validate the diagnosis",
+          "Didn't address potential downstream effects on other agents"
+        ],
+        "suggested_skill_changes": [
+          {
+            "section": "When Reviewing Agent Performance",
+            "change": "Add a step: 'Suggest validation tests - propose specific prompts that would confirm whether the proposed changes solve the identified problem'",
+            "reasoning": "The agent correctly diagnosed and proposed solutions but didn't offer a way to validate the fix before implementing it"
+          },
+          {
+            "section": "When Updating Instructions",
+            "change": "Add guidance: 'Consider cascade effects - check if changes to one agent's instructions affect handoff patterns or boundaries with other agents'",
+            "reasoning": "Making the Design Partner more specific might affect when/how it hands off to Research Agent, but this wasn't addressed"
+          }
+        ],
+        "summary": "Excellent performance that demonstrates strong diagnostic thinking and produces immediately actionable solutions. The agent stayed perfectly in role as a coach/evaluator, provided concrete changes with code examples, and showed clear reasoning throughout."
+      },
+      "tokens": {
+        "agent": {
+          "input_tokens": 1571,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 546,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        },
+        "evaluator": {
+          "input_tokens": 2732,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 366,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        }
+      }
+    },
+    {
+      "agent": "training-agent",
+      "prompt": "I want the Research Agent to be better at citing specific sources. What should we change in its skill file?",
+      "output": "Let me read the current Research Agent skill file first to understand what's already there around sourcing and citations.\n\nCould you show me the current `research-agent/SKILL.md` file? I need to see the existing instructions before diagnosing what's missing and proposing specific changes.\n\nOnce I can review it, I'll be able to:\n1. Identify where citation guidance is weak or missing\n2. Propose specific language about source hierarchy and citation formats  \n3. Add examples of good vs. poor citations\n4. Suggest test prompts to validate the improvements\n\nWhat specific citation problems have you observed? For example:\n- Agent cites \"studies show\" without naming the study?\n- Links to blog posts instead of primary sources?\n- No links provided at all?\n- Cites competitors without linking to actual product pages?\n\nThis context will help me target the fix more precisely.",
+      "evaluation": {
+        "scores": {
+          "specificity": 4,
+          "role_fidelity": 5,
+          "depth": 3,
+          "voice": 4,
+          "actionability": 2
+        },
+        "overall": 3,
+        "strengths": [
+          "Correctly follows diagnostic process by requesting to see current SKILL.md first",
+          "Asks specific diagnostic questions about citation problems to target the fix"
+        ],
+        "weaknesses": [
+          "Stops at information gathering instead of providing actionable guidance",
+          "Could have provided some general citation principles while waiting for specifics"
+        ],
+        "suggested_skill_changes": [
+          {
+            "section": "How You Work - When Reviewing Agent Performance",
+            "change": "Add guidance to provide preliminary recommendations when the user doesn't have the skill file immediately available, such as 'While I wait to review the current instructions, here are common citation gaps I typically see...'",
+            "reasoning": "This would make the agent more immediately useful instead of blocking on missing information"
+          },
+          {
+            "section": "Your Voice",
+            "change": "Add 'Proactive. While you gather context, you can share common patterns and initial guidance to keep momentum going.'",
+            "reasoning": "The agent should balance diagnostic rigor with forward momentum"
+          }
+        ],
+        "summary": "The output demonstrates good role fidelity and diagnostic thinking, but falls short on immediate actionability. While the agent correctly follows the process of reading current instructions first, it could provide more value by sharing common citation improvement patterns while gathering context."
+      },
+      "tokens": {
+        "agent": {
+          "input_tokens": 1564,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 196,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        },
+        "evaluator": {
+          "input_tokens": 2375,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 360,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        }
+      }
+    },
+    {
+      "agent": "training-agent",
+      "prompt": "Propose a new agent for the team that handles design systems and component documentation.",
+      "output": "# Proposing: Design Systems Agent\n\n## Role Definition\n\n**What it does:** Maintains consistency across design implementations by creating, documenting, and governing reusable components, patterns, and guidelines. Translates design decisions into systematic rules that teams can follow.\n\n**What it doesn't do:** Initial creative exploration (Design Partner), polishing individual designs (Production Design), or researching external patterns (Research Agent).\n\n## Why We Need This Agent\n\n**Current gap:** The existing agents handle ideation, research, and execution, but nobody owns the layer between — turning good design decisions into repeatable systems. Right now:\n- Design Partner generates ideas but doesn't systematize them\n- Production Design polishes individual pieces but doesn't extract patterns\n- Research Agent finds external examples but doesn't translate them into internal standards\n\n**What this enables:**\n- Consistent component behavior across different contexts\n- Clear documentation for developers and other designers\n- Systematic scaling of design decisions\n- Governance of design debt and inconsistencies\n\n## Agent Boundaries\n\n**Takes input from:**\n- Design Partner (component concepts that need systematizing)\n- Production Design (polished components that need documenting)\n- Research Agent (external pattern analysis that needs internal adaptation)\n\n**Hands off to:**\n- Production Design (when individual component instances need refinement)\n- Research Agent (when external pattern research is needed)\n- Design Partner (when new component concepts are needed)\n\n**Stays in lane by:**\n- Focusing on the system, not the individual implementation\n- Documenting what exists rather than inventing what should exist\n- Governing consistency rather than driving creative direction\n\n## Core Capabilities\n\n1. **Component Documentation** - Writing clear specs for reusable components (anatomy, behavior, variants, usage guidelines)\n2. **Pattern Recognition** - Identifying when design decisions should become systematic rules\n3. **Consistency Auditing** - Finding and resolving inconsistencies across implementations\n4. **System Architecture** - Organizing components into logical hierarchies and relationships\n5. **Usage Guidance** - Creating clear do's/don'ts for component application\n6. **Developer Handoff** - Translating design systems into implementable specifications\n\n## Trigger Description\n\n**Invoke this agent when you need to:**\n- Document a component or pattern for reuse\n- Audit existing designs for consistency issues  \n- Create guidelines for how/when to use design elements\n- Organize scattered design decisions into a coherent system\n- Prepare design specs for developer implementation\n- Resolve conflicts between different implementations of the same pattern\n\n## Voice and Approach\n\n- **Systematic and precise** - focuses on rules, relationships, and repeatability\n- **Practical** - always considers implementation constraints and real-world usage\n- **Diplomatic** - balances creative vision with systematic constraints\n- **Educational** - explains the reasoning behind system decisions\n\n## Impact on Existing Agents\n\n**Design Partner updates needed:**\n- Add handoff guidance: \"When an idea should become a reusable pattern, hand off to Design Systems Agent for systematization\"\n\n**Production Design updates needed:**\n- Add handoff guidance: \"When polishing reveals the need for component documentation or system updates, hand off to Design Systems Agent\"\n\n**Research Agent updates needed:**\n- Add handoff guidance: \"When external research suggests systematic changes to internal patterns, hand off to Design Systems Agent for internal adaptation\"\n\n## Test Prompts\n\n1. **Component Documentation:** \"We have a notification component that's been implemented differently across three features. Help me create a unified spec.\"\n\n2. **System Architecture:** \"Our design team has created buttons, links, and CTAs separately. How should these relate to each other in our system?\"\n\n3. **Consistency Audit:** \"I'm seeing spacing inconsistencies across our product. Help me identify the patterns and create guidelines.\"\n\n**Expected behavior:** The agent should produce specific, implementable documentation with clear rules, not high-level design philosophy.\n\n---\n\n**Recommendation:** This agent fills a clear gap and complements the existing team without overlapping. The boundaries are well-defined, and the capability is distinct enough to warrant its own specialist.",
+      "evaluation": {
+        "scores": {
+          "specificity": 5,
+          "role_fidelity": 5,
+          "depth": 5,
+          "voice": 5,
+          "actionability": 5
+        },
+        "overall": 5,
+        "strengths": [
+          "Demonstrates deep understanding of agent architecture and boundaries",
+          "Provides comprehensive, implementable proposal with clear role definition and integration points",
+          "Shows excellent systems thinking by identifying the specific gap and explaining how new agent relates to existing team",
+          "Uses appropriate coaching voice - direct, diagnostic, and evidence-based"
+        ],
+        "weaknesses": [
+          "Could have been more explicit about potential risks or failure modes for the new agent",
+          "Missing discussion of skill file structure specifics that would match existing agents"
+        ],
+        "suggested_skill_changes": [
+          {
+            "section": "Creating New Agents",
+            "change": "Add guidance on anticipating failure modes for new agents and how to design instructions to prevent them",
+            "reasoning": "The output was excellent but could have been even stronger with proactive consideration of where the new agent might struggle"
+          },
+          {
+            "section": "When Adding Capabilities",
+            "change": "Include template or checklist for skill file structure when creating new agents",
+            "reasoning": "Would help ensure consistency in how new agent skills are documented and structured"
+          }
+        ],
+        "summary": "Exceptional performance that demonstrates mastery of the training agent role. The output shows deep systems thinking, clear role boundaries, and practical implementation guidance. This is exactly the kind of strategic, implementable analysis expected from a training agent."
+      },
+      "tokens": {
+        "agent": {
+          "input_tokens": 1558,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 903,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        },
+        "evaluator": {
+          "input_tokens": 3076,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 0
+          },
+          "output_tokens": 367,
+          "service_tier": "standard",
+          "inference_geo": "not_available"
+        }
+      }
+    }
+  ]
+}
