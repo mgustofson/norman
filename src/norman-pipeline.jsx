@@ -6,6 +6,25 @@ import { useState, useEffect, useRef, useCallback } from "react";
 
 const PIPELINE = [
   {
+    id: "intake",
+    name: "Intake",
+    role: "Product Manager",
+    color: "#F6C85F",
+    icon: "⊚",
+    systemPrompt: `You are a Product Manager on a team called Norman. Your job is to take a raw, often vague design brief from a user and turn it into a structured, comprehensive, and actionable product brief that the rest of the design team can execute on.
+
+Your output must follow this structure:
+- **Core Problem**: What user need or business goal are we addressing?
+- **Target Audience**: Who are the primary users? Be specific about their behaviors and needs.
+- **Key Use Cases**: 2-3 specific scenarios the design must handle.
+- **Constraints & Requirements**: Technical, platform, or business limitations.
+- **Success Criteria**: How will we know if this design is successful?
+
+If the brief is too simple (e.g., "Design a settings page"), expand it into a realistic scenario by inferring reasonable defaults. Give it substance so the design team has real constraints to work with. No fluff. Be direct.`,
+    buildPrompt: (brief) =>
+      `Raw user brief: "${brief}"\n\nPlease expand this raw brief into a comprehensive, structured product brief following your standardized format. Infer reasonable defaults if the raw brief is too sparse.`,
+  },
+  {
     id: "research",
     name: "Research",
     role: "Research Agent",
@@ -99,6 +118,45 @@ Keep everything specific — exact values, exact hex codes, exact pixel measurem
     buildPrompt: (brief, prevOutputs) =>
       `Original brief: "${brief}"\n\n--- RESEARCH FINDINGS ---\n${prevOutputs.research}\n--- END RESEARCH ---\n\n--- CONCEPT DIRECTIONS ---\n${prevOutputs.ideation}\n--- END CONCEPTS ---\n\nTake the strongest concept direction and produce a complete, production-ready design specification. Be precise with values — hex codes, pixel measurements, font weights, ratios. This needs to be implementable.`,
   },
+  {
+    id: "engineering",
+    name: "Engineering",
+    role: "Frontend Engineer",
+    color: "#9D4EDD",
+    icon: "⌨",
+    systemPrompt: `You are a frontend engineering specialist on a team called Norman. You receive complete design specifications from the Production Design agent. Your job is to translate these exact specifications into clean, functional, and responsive frontend code.
+
+Given the design specification and the original brief:
+1. Review the typography, colors, spacing, components, and layout specs.
+2. Produce the complete frontend code (e.g., a React component using Tailwind CSS, or clean semantic HTML/CSS) that perfectly implements the specification.
+3. Do not invent new design rules; adhere strictly to the exact hex codes, pixel measurements, and layout grids provided by the Production Design agent.
+4. If a piece of logic or interaction is described, add the necessary state or JavaScript to make it functional.
+5. Structure your output clearly. Provide the complete code within markdown code blocks.
+6. Ensure the code is production-ready, accessible, and responsive.
+
+Your output should be immediately usable by the user. Focus on code quality and pixel-perfect translation of the design spec.`,
+    buildPrompt: (brief, prevOutputs) =>
+      `Original brief: "${brief}"\n\n--- PRODUCTION DESIGN SPEC ---\n${prevOutputs.production}\n--- END SPEC ---\n\nTake the exact design specification provided and build the frontend code for it. Output a single, complete, copy-pasteable implementation (e.g., React component with Tailwind, or semantic HTML/CSS) that adheres flawlessly to the specified colors, typography, spacing, and layout.`,
+  },
+  {
+    id: "qa",
+    name: "Quality Assurance",
+    role: "QA Director",
+    color: "#E2C044",
+    icon: "👁",
+    systemPrompt: `You are the QA Director on a team called Norman. Your job is to review the final engineered output against the user's original design brief and ensure all goals and constraints were successfully met.
+
+Given the original brief, the expanded intake goals, and the final frontend code:
+1. Cross-reference the final code with the Core Problem, Key Use Cases, and Constraints from the brief.
+2. Verify that the implemented code actually solves the initial problem and serves the target audience.
+3. Output a clear "PASS" or "FAIL" assessment at the very top.
+4. List any "Critical Misses" if core requirements were ignored.
+5. List any "Polish Items" if there are minor discrepancies or UX improvements needed.
+
+Your goal is to act as the final gatekeeper, ensuring the user's original intent was preserved through the entire pipeline.`,
+    buildPrompt: (brief, prevOutputs) =>
+      `Original brief: "${brief}"\n\n--- INTAKE (Goals) ---\n${prevOutputs.intake}\n--- END INTAKE ---\n\n--- ENGINEERED CODE ---\n${prevOutputs.engineering}\n--- END CODE ---\n\nReview the engineered code against the initial brief and intake goals. Did the final output successfully meet the goals of the initial brief? Provide your final assessment.`,
+  },
 ];
 
 // ─────────────────────────────────────────────────────────────
@@ -106,11 +164,11 @@ Keep everything specific — exact values, exact hex codes, exact pixel measurem
 // ─────────────────────────────────────────────────────────────
 
 async function callClaude(systemPrompt, userMessage) {
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
+  const res = await fetch("/api/anthropic/v1/messages", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
+      model: "claude-3-7-sonnet-20250219",
       max_tokens: 1000,
       system: systemPrompt,
       messages: [{ role: "user", content: userMessage }],
@@ -300,6 +358,7 @@ export default function NormanPipeline() {
   const elapsedRef = useRef(0);
   const [liveElapsed, setLiveElapsed] = useState(0);
   const [activeStageIndex, setActiveStageIndex] = useState(-1);
+  const [reviewState, setReviewState] = useState(null);
 
   // Load history
   useEffect(() => {
@@ -342,8 +401,39 @@ export default function NormanPipeline() {
       );
 
       try {
-        const userMessage = stage.buildPrompt(brief, outputs);
-        const output = await callClaude(stage.systemPrompt, userMessage);
+        let approved = false;
+        let attempt = 0;
+        let lastFeedback = "";
+        let output = "";
+
+        while (!approved && attempt <= 2) {
+          attempt++;
+          const basePrompt = stage.buildPrompt(brief, outputs);
+          const prompt = attempt === 1
+            ? basePrompt
+            : `${basePrompt}\n\nDIRECTOR FEEDBACK on your previous attempt:\n${lastFeedback}\n\nAddress this feedback specifically. Previous output:\n---\n${output}\n---`;
+
+          output = await callClaude(stage.systemPrompt, prompt);
+          
+          setStages((prev) =>
+            prev.map((s, idx) => (idx === i ? { ...s, status: "running", output: output } : s))
+          );
+          setExpandedStage(stage.id);
+
+          // Pause for Human Review
+          const humanFeedback = await new Promise((resolve) => {
+             setReviewState({ stage, output, resolve });
+          });
+
+          setReviewState(null);
+
+          if (!humanFeedback) {
+             approved = true; // Human clicked "Approve"
+          } else {
+             lastFeedback = `HUMAN DIRECTOR OVERRIDE: ${humanFeedback}`;
+          }
+        }
+
         outputs[stage.id] = output;
 
         clearInterval(timerRef.current);
@@ -354,9 +444,8 @@ export default function NormanPipeline() {
             idx === i ? { ...s, status: "done", output, elapsed: stageElapsed } : s
           )
         );
+        setExpandedStage(null);
 
-        // Auto-expand the latest completed stage
-        setExpandedStage(stage.id);
       } catch (err) {
         clearInterval(timerRef.current);
         setStages((prev) =>
@@ -553,7 +642,7 @@ export default function NormanPipeline() {
               borderRadius: 10,
               display: "flex",
               alignItems: "center",
-              gap: 8,
+              gap: 12,
               marginBottom: 24,
               animation: "fadeIn 0.4s ease",
             }}
@@ -564,7 +653,6 @@ export default function NormanPipeline() {
             </span>
             <span
               style={{
-                marginLeft: "auto",
                 fontSize: 12,
                 color: "rgba(255,255,255,0.35)",
                 fontFamily: "'JetBrains Mono', monospace",
@@ -572,6 +660,32 @@ export default function NormanPipeline() {
             >
               {totalTime}s total
             </span>
+            <button
+              onClick={() => {
+                const doc = `# Norman Design Document\n\n**Brief:** ${brief}\n\n` + 
+                  stages.map(s => `## ${s.name}\n\n${s.output}\n\n`).join("---\n\n");
+                const blob = new Blob([doc], { type: "text/markdown" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `norman-design-${new Date().toISOString().split("T")[0]}.md`;
+                a.click();
+              }}
+              style={{
+                marginLeft: "auto",
+                padding: "6px 12px",
+                background: "#45B69C",
+                border: "none",
+                borderRadius: 6,
+                color: "#fff",
+                fontSize: 12,
+                fontWeight: 600,
+                cursor: "pointer",
+                fontFamily: "'JetBrains Mono', monospace",
+              }}
+            >
+              ↓ Download Deliverable
+            </button>
           </div>
         )}
 
@@ -607,6 +721,36 @@ export default function NormanPipeline() {
               />
             ))}
         </div>
+
+        {/* Review Panel */}
+        {reviewState && (
+          <div style={{ marginTop: 24, padding: 20, background: "rgba(246, 200, 95, 0.08)", border: "1px solid rgba(246, 200, 95, 0.2)", borderRadius: 10, animation: "fadeIn 0.3s ease" }}>
+            <h3 style={{ margin: "0 0 10px 0", fontSize: 14, color: "#F6C85F", fontFamily: "'JetBrains Mono', monospace" }}>Co-Pilot Review: {reviewState.stage.name}</h3>
+            <p style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", marginBottom: 16 }}>
+              Review the output above. Approve to proceed to the next stage, or provide feedback for the agent to revise.
+            </p>
+            <textarea
+              id="review-feedback"
+              placeholder="Type feedback for revision..."
+              style={{ width: "100%", height: 80, background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.1)", color: "#fff", padding: "12px 14px", borderRadius: 8, marginBottom: 16, fontSize: 13, resize: "none", fontFamily: "inherit" }}
+            />
+            <div style={{ display: "flex", gap: 12 }}>
+              <button 
+                onClick={() => reviewState.resolve(null)} 
+                style={{ padding: "10px 20px", background: "#45B69C", border: "none", borderRadius: 8, color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: 13 }}>
+                ✓ Approve & Continue
+              </button>
+              <button 
+                onClick={() => {
+                  const val = document.getElementById("review-feedback").value;
+                  if (val.trim()) reviewState.resolve(val);
+                }} 
+                style={{ padding: "10px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: 13 }}>
+                ↺ Request Revision
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Previous runs */}
         {history.length > 0 && !isRunning && stages.every((s) => s.status === "pending") && (

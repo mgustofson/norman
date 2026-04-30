@@ -4,6 +4,7 @@
   "description": "A virtual design team powered by specialized AI agents",
   "type": "module",
   "scripts": {
+    "dev": "vite",
     "build": "node scripts/build.js",
     "review": "node scripts/review.js",
     "evaluate": "node scripts/evaluate.js",
@@ -11,11 +12,17 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
-    "dotenv": "^16.4.0"
+    "dotenv": "^16.4.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
   },
   "engines": {
     "node": ">=18.0.0"
   },
   "author": "Max Gustofson",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.1",
+    "vite": "^8.0.10"
+  }
 }

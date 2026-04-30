@@ -21,6 +21,9 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { parseArgs } from "util";
+import * as readline from "readline/promises";
+
+let IS_INTERACTIVE = false;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -142,7 +145,7 @@ async function callAgent(client, systemPrompt, userMessage, maxTokens = 2000) {
         ],
       });
 
-      const continuation = continueResponse.content.map((b) => (b.type === "text" ? b.text : "")).join("\n");
+      const continuation = continueResponse.content.map((b) => (b.type === "text" ? b.text : "")).join("\n").replace(/[\uD800-\uDFFF]/g, "");
       fullText += continuation;
       stopReason = continueResponse.stop_reason;
 
@@ -182,17 +185,86 @@ Evaluate this output. Respond ONLY with JSON (no fences):
 Standards: Approve if quality >= 3 and the output is specific to the actual brief (not generic). Reject if it's shallow, generic, or misses the point of the brief. Be demanding but fair.`;
 
   const result = await callAgent(client, DIRECTOR_PROMPT, reviewPrompt, 500);
+  let reviewObj;
   try {
-    return JSON.parse(result.text.replace(/```json|```/g, "").trim());
+    reviewObj = JSON.parse(result.text.replace(/```json|```/g, "").trim());
   } catch (e) {
     // If parsing fails, assume approved to keep the pipeline moving
-    return { approved: true, quality: 3, feedback: "Review parse failed, proceeding.", key_strengths: [], concerns: [] };
+    reviewObj = { approved: true, quality: 3, feedback: "Review parse failed, proceeding.", key_strengths: [], concerns: [] };
   }
+
+  if (IS_INTERACTIVE) {
+    console.log(`\n${COLORS.magenta}◆ Norman's Gut Check: ${reviewObj.approved ? "APPROVED" : "REVISION NEEDED"} (${reviewObj.quality}/5)${COLORS.reset}`);
+    console.log(`  Feedback: ${reviewObj.feedback}`);
+    
+    const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+    const answer = await rl.question(`\n${COLORS.bold}  Hit Enter to accept Norman's decision, or type feedback to send back to the agent: ${COLORS.reset}`);
+    rl.close();
+
+    if (answer.trim() !== "") {
+      reviewObj.approved = false;
+      reviewObj.feedback = `HUMAN DIRECTOR OVERRIDE: ${answer.trim()}`;
+      logReview(`Human feedback received. Sending back to agent.`);
+    }
+  }
+
+  return reviewObj;
 }
 
 // ─────────────────────────────────────────────────────────────
 // Pipeline stages
 // ─────────────────────────────────────────────────────────────
+
+async function runProductManager(client, rawBrief) {
+  logSection("Stage 0 → Product Manager");
+  const systemPrompt = loadAgentPrompt("product-manager");
+  let output = "";
+  let lastFeedback = "";
+  let approved = false;
+  let attempt = 0;
+
+  const basePrompt = `Raw user brief: "${rawBrief}"
+
+Please expand this raw brief into a comprehensive, structured product brief following your standardized format. Infer reasonable defaults if the raw brief is too sparse.`;
+
+  while (!approved && attempt <= MAX_REVISIONS) {
+    attempt++;
+    logAgent("Product Manager", attempt === 1 ? "Expanding brief..." : `Revision ${attempt} based on feedback...`);
+
+    const prompt = attempt === 1
+      ? basePrompt
+      : `${basePrompt}\n\nDIRECTOR FEEDBACK on your previous attempt:\n${lastFeedback}\n\nAddress this feedback specifically. Previous output:\n---\n${output}\n---`;
+
+    const result = await callAgent(client, systemPrompt, prompt, 2000);
+    output = result.text;
+    logAgent("Product Manager", `Output: ${output.length} chars (${result.usage.output_tokens} tokens)`);
+
+    await delay(1000);
+
+    // Director review
+    logReview("Director reviewing expanded brief...");
+    const review = await directorReview(client, "Product Manager", output, rawBrief, null);
+    logReview(`Quality: ${review.quality}/5 — ${review.approved ? "APPROVED" : "REVISION NEEDED"}`);
+
+    if (review.approved) {
+      approved = true;
+      logDone(`Brief approved (attempt ${attempt})`);
+      if (review.key_strengths?.length) {
+        review.key_strengths.forEach(s => logDone(`  + ${s}`));
+      }
+    } else {
+      logReview(`Feedback: ${review.feedback}`);
+      lastFeedback = review.feedback;
+      if (attempt > MAX_REVISIONS) {
+        logReview("Max revisions reached, proceeding with current expanded brief");
+      }
+    }
+
+    await delay(1000);
+  }
+
+  return output;
+}
 
 async function runResearch(client, brief) {
   logSection("Stage 1 → Research Agent");
@@ -476,8 +548,11 @@ async function build(brief, outputDir) {
 
   let totalTokens = 0;
 
+  // Stage 0: Intake
+  const expandedBrief = await runProductManager(client, brief);
+
   // Stage 1: Research
-  const research = await runResearch(client, brief);
+  const research = await runResearch(client, expandedBrief);
 
   // Stage 2: Ideation
   const ideation = await runIdeation(client, brief, research);
@@ -506,6 +581,7 @@ async function build(brief, outputDir) {
   // Save raw stage outputs for reference
   const rawDir = join(outDir, "raw");
   mkdirSync(rawDir, { recursive: true });
+  writeFileSync(join(rawDir, `${timestamp}_${slugBrief}_brief.md`), expandedBrief);
   writeFileSync(join(rawDir, `${timestamp}_${slugBrief}_research.md`), research);
   writeFileSync(join(rawDir, `${timestamp}_${slugBrief}_ideation.md`), ideation);
   writeFileSync(join(rawDir, `${timestamp}_${slugBrief}_prototype.html`), production);
@@ -537,6 +613,7 @@ const { values, positionals } = parseArgs({
     brief: { type: "string", short: "b" },
     "brief-file": { type: "string", short: "f" },
     output: { type: "string", short: "o" },
+    interactive: { type: "boolean", short: "i", default: false },
   },
   allowPositionals: true,
 });
@@ -546,6 +623,8 @@ let brief = values.brief || positionals.join(" ");
 if (values["brief-file"]) {
   brief = readFileSync(values["brief-file"], "utf-8").trim();
 }
+
+IS_INTERACTIVE = values.interactive;
 
 if (!brief) {
   console.log(`
